@@ -91,5 +91,5 @@ jobs:
           DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
         with:
           project: "gallery"
-          entrypoint: "https://deno.land/std@0.188.0/http/file_server.ts"
+          entrypoint: "dist/server/main.ts"
           root: "dist"
