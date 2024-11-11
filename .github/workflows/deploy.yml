@@ -18,13 +18,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Bun environment
+      - name: Install Bun manually
         run: |
           curl -fsSL https://bun.sh/install | bash
           export BUN_INSTALL="$HOME/.bun"
           export PATH="$BUN_INSTALL/bin:$PATH"
-          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
-
+          echo "BUN_INSTALL=$BUN_INSTALL" >> $GITHUB_ENV
+          echo "PATH=$BUN_INSTALL/bin:$PATH" >> $GITHUB_ENV
       - name: Verify Bun installation
         run: bun --version
 
