@@ -25,8 +25,14 @@ jobs:
           export PATH="$BUN_INSTALL/bin:$PATH"
           echo "BUN_INSTALL=$BUN_INSTALL" >> $GITHUB_ENV
           echo "PATH=$BUN_INSTALL/bin:$PATH" >> $GITHUB_ENV
+          # Source the environment variables to make sure they are loaded for the current session
+          source $HOME/.bashrc || true
+
       - name: Verify Bun installation
-        run: bun --version
+        shell: bash
+        run: |
+          export PATH="$HOME/.bun/bin:$PATH"
+          bun --version
 
       - name: Cache dependencies and build artifacts
         uses: actions/cache@v4
