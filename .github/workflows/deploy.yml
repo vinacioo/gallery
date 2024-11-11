@@ -60,6 +60,11 @@ jobs:
             exit 1
           fi
 
+      - name: Debug build output
+        run: |
+          echo "Contents of dist directory:"
+          ls -R dist
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
