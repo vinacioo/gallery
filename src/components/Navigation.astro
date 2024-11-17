@@ -4,23 +4,24 @@ import Pagefind from "./Pagefind.astro";
 
 <div id="nav-links" class="nav-links collapsed font-overpass-mono capitalize">
   <a class="fade-effect" href="/">Home</a>
-  <!-- <a class="fade-effect" href="/muses/">Muses</a> -->
   <a class="fade-effect" href="/authors/">Biografias</a>
-  <!-- <a class="fade-effect" href="/kanayko/">Short Form</a> -->
-  <!-- <a class="fade-effect" href="/kanayko/tags/">Albuns</a> -->
   <div class="dropdown">
-    <a class="fade-effect dropdown-toggle" href="#">Albuns</a>
-    <div class="dropdown-menu">
+    <a
+      class="fade-effect dropdown-toggle"
+      href="#"
+      onclick="toggleDropdown(event, 'albuns-menu')">Albuns</a
+    >
+    <div id="albuns-menu" class="dropdown-menu">
       <a class="fade-effect" href="/kanayko/">Edgar Kanaykõ</a>
       <a class="fade-effect" href="/ester/">Ester Menezes Xucuru</a>
       <a class="fade-effect" href="/priscila/">Priscila Tapajowara</a>
     </div>
   </div>
   <a class="fade-effect" href="/zeitweilig/catalogo/">Projeto HH955</a>
-  <!-- <a href="/tags/">Tags</a> -->
   <Pagefind class="fade-effect" />
   <slot />
 </div>
+
 <style>
   /* nav styles */
   .nav-links {
@@ -34,16 +35,29 @@ import Pagefind from "./Pagefind.astro";
     z-index: 10;
     pointer-events: none;
   }
+
+  /* Dropdown base styles */
+  .dropdown {
+    position: relative;
+  }
+
   /* Hide the dropdown menu by default */
   .dropdown-menu {
     display: none;
     position: relative;
     margin-left: 20px; /* Indent the sub-menu */
   }
-  /* Show the dropdown menu on hover */
+
+  /* Show dropdown menu on hover (desktop) */
   .dropdown:hover .dropdown-menu {
     display: block;
   }
+
+  /* Show dropdown menu when open class is applied (mobile) */
+  .dropdown-menu.open {
+    display: block;
+  }
+
   .nav-links.collapsed {
     right: 0;
     opacity: 0;
@@ -78,6 +92,7 @@ import Pagefind from "./Pagefind.astro";
   html:not(.dark) .nav-links {
     background: rgb(245, 245, 245);
   }
+
   .fade-effect {
     transition: opacity 0.5s ease-in-out;
     opacity: 1;
@@ -86,10 +101,50 @@ import Pagefind from "./Pagefind.astro";
   .fade-effect:hover {
     opacity: 0.5;
   }
+
   .nav-search {
     display: flex;
     align-items: center;
     padding: 10px;
     width: 100%; /* make the search box take up the whole width */
   }
+
+  /* Mobile-friendly styling */
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      margin-left: 0; /* Align the submenu with the parent on mobile */
+      padding: 10px 0;
+    }
+
+    .dropdown-menu a {
+      padding-left: 10px;
+      font-size: 14px; /* Reduce font size for dropdown links on mobile */
+    }
+
+    .dropdown-toggle {
+      font-size: 16px; /* Reduce font size for "Albuns" on mobile */
+    }
+
+    .nav-links a {
+      font-size: 16px; /* Reduce font size for all links on mobile */
+    }
+  }
 </style>
+
+<script>
+  declare global {
+    interface Window {
+      toggleDropdown: (event: MouseEvent, menuId: string) => void;
+    }
+  }
+
+  window.toggleDropdown = function (event: MouseEvent, menuId: string): void {
+    event.preventDefault(); // Prevent link default behavior
+    const dropdownMenu = document.getElementById(menuId);
+    if (!dropdownMenu) {
+      console.error(`Dropdown menu with ID '${menuId}' not found.`);
+      return; // Exit if the element is not found
+    }
+    dropdownMenu.classList.toggle("open"); // Toggle the 'open' class
+  };
+</script>
