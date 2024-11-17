@@ -6,8 +6,16 @@ import Pagefind from "./Pagefind.astro";
   <a class="fade-effect" href="/">Home</a>
   <!-- <a class="fade-effect" href="/muses/">Muses</a> -->
   <a class="fade-effect" href="/authors/">Biografias</a>
-  <!-- <a class="fade-effect" href="/short_form/">Short Form</a> -->
-  <!-- <a class="fade-effect" href="/short_form/tags/">Albuns</a> -->
+  <!-- <a class="fade-effect" href="/kanayko/">Short Form</a> -->
+  <!-- <a class="fade-effect" href="/kanayko/tags/">Albuns</a> -->
+  <div class="dropdown">
+    <a class="fade-effect dropdown-toggle" href="#">Albuns</a>
+    <div class="dropdown-menu">
+      <a class="fade-effect" href="/kanayko/">Edgar Kanaykõ</a>
+      <a class="fade-effect" href="/ester/">Ester Menezes Xucuru</a>
+      <a class="fade-effect" href="/priscila/">Priscila Tapajowara</a>
+    </div>
+  </div>
   <a class="fade-effect" href="/zeitweilig/catalogo/">Projeto HH955</a>
   <!-- <a href="/tags/">Tags</a> -->
   <Pagefind class="fade-effect" />
@@ -25,6 +33,16 @@ import Pagefind from "./Pagefind.astro";
     opacity: 0;
     z-index: 10;
     pointer-events: none;
+  }
+  /* Hide the dropdown menu by default */
+  .dropdown-menu {
+    display: none;
+    position: relative;
+    margin-left: 20px; /* Indent the sub-menu */
+  }
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
   }
   .nav-links.collapsed {
     right: 0;
