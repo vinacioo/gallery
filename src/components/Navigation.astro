@@ -134,15 +134,15 @@ import Pagefind from "./Pagefind.astro";
   }
 </style>
 
-<!-- <script> -->
-<!--   // Attach the function to the global `window` object for use in the HTML -->
-<!--   window.toggleDropdown = function (event: MouseEvent, menuId: string): void { -->
-<!--     event.preventDefault(); // Prevent link default behavior -->
-<!--     const dropdownMenu = document.getElementById(menuId); -->
-<!--     if (!dropdownMenu) { -->
-<!--       console.error(`Dropdown menu with ID '${menuId}' not found.`); -->
-<!--       return; // Exit if the element is not found -->
-<!--     } -->
-<!--     dropdownMenu.classList.toggle("open"); // Toggle the 'open' class -->
-<!--   }; -->
-<!-- </script> -->
+<script>
+  // Attach the function to the global `window` object for use in the HTML
+  window.toggleDropdown = function (event: MouseEvent, menuId: string): void {
+    event.preventDefault(); // Prevent link default behavior
+    const dropdownMenu = document.getElementById(menuId);
+    if (!dropdownMenu) {
+      console.error(`Dropdown menu with ID '${menuId}' not found.`);
+      return; // Exit if the element is not found
+    }
+    dropdownMenu.classList.toggle("open"); // Toggle the 'open' class
+  };
+</script>
