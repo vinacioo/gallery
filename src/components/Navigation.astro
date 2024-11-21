@@ -9,17 +9,16 @@ import Pagefind from "./Pagefind.astro";
     <a
       class="fade-effect dropdown-toggle"
       href="#"
-      onclick="toggleDropdown(event, 'albuns-menu')"
+      onclick="toggleDropdown(event, 'albuns-menu')">Catálogo</a
     >
-      Albuns
-    </a>
     <div id="albuns-menu" class="dropdown-menu">
-      <a class="fade-effect sub-link" href="/kanayko/">Edgar Kanaykõ</a>
-      <a class="fade-effect sub-link" href="/ester/">Ester Menezes Xucuru</a>
-      <a class="fade-effect sub-link" href="/priscila/">Priscila Tapajowara</a>
+      <a class="fade-effect" href="/kanayko/">Edgar Kanaykõ</a>
+      <a class="fade-effect" href="/ester/">Ester Menezes Xucuru</a>
+      <a class="fade-effect" href="/priscila/">Priscila Tapajowara</a>
     </div>
   </div>
   <a class="fade-effect" href="/zeitweilig/catalogo/">Projeto HH955</a>
+  <Pagefind class="fade-effect" />
   <slot />
 </div>
 
@@ -30,17 +29,41 @@ import Pagefind from "./Pagefind.astro";
     width: 300px;
     height: auto;
     right: -100%;
-    padding: 10px;
+    padding: 0px;
     transition: opacity 0.2s ease-in-out;
     opacity: 0;
     z-index: 10;
     pointer-events: none;
   }
 
+  /* Dropdown base styles */
+  .dropdown {
+    position: relative;
+    margin-left: 0px; /* Indent the sub-menu */
+  }
+
+  /* Hide the dropdown menu by default */
+  .dropdown-menu {
+    display: none;
+    position: relative;
+    margin-left: 25px; /* Indent the sub-menu */
+  }
+
+  /* Show dropdown menu on hover (desktop) */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    top: -5px;
+  }
+
+  /* Show dropdown menu when open class is applied (mobile) */
+  .dropdown-menu.open {
+    display: block;
+  }
+
   .nav-links.collapsed {
     right: 0;
     opacity: 0;
-    top: 25px;
+    top: 50px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
   }
@@ -57,32 +80,11 @@ import Pagefind from "./Pagefind.astro";
   .nav-links a {
     display: block;
     line-height: 50px;
-    padding-left: 30px; /* Consistent left padding */
+    padding-left: 30px;
     box-sizing: border-box;
     font-size: 18px;
     text-decoration: none;
     height: auto;
-  }
-
-  /* Dropdown styles */
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown-menu {
-    display: none;
-    margin-left: 30px; /* Indent dropdown content */
-  }
-
-  .dropdown:hover .dropdown-menu,
-  .dropdown-menu.open {
-    display: block;
-  }
-
-  .dropdown-menu .sub-link {
-    padding-left: 25px; /* Extra indentation for sub-links */
-    font-size: 15px; /* Smaller font size for sub-links */
-    line-height: 35px; /* Adjust spacing for sub-links */
   }
 
   html.dark .nav-links {
@@ -102,51 +104,45 @@ import Pagefind from "./Pagefind.astro";
     opacity: 0.5;
   }
 
-  /* Mobile-specific styles */
+  .nav-search {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    width: 100%; /* make the search box take up the whole width */
+  }
+
+  /* Mobile-friendly styling */
   @media (max-width: 768px) {
     .dropdown-menu {
-      margin-left: 15px; /* Reduce margin for mobile */
+      margin-left: 10; /* Align the submenu with the parent on mobile */
       padding: 10px 0;
     }
 
-    .dropdown-menu .sub-link {
-      padding-left: 20px; /* Adjust indentation for mobile */
-      font-size: 14px; /* Slightly smaller font */
+    .dropdown-menu a {
+      padding-left: 10px;
+      font-size: 14px; /* Reduce font size for dropdown links on mobile */
     }
 
     .dropdown-toggle {
-      font-size: 17px;
+      font-size: 16px; /* Reduce font size for "Albuns" on mobile */
     }
 
     .nav-links a {
-      font-size: 17px;
+      font-size: 16px; /* Reduce font size for all links on mobile */
+      padding-left: 30px;
     }
   }
 </style>
 
-<script>
-  // TypeScript declaration for `window.toggleDropdown`
-  declare global {
-    interface Window {
-      toggleDropdown: (event: MouseEvent, menuId: string) => void;
-    }
-  }
-
-  // Define the `toggleDropdown` function
-  window.toggleDropdown = function (event: MouseEvent, menuId: string): void {
-    event.preventDefault(); // Prevent default behavior
-    const dropdownMenu = document.getElementById(menuId);
-    if (!dropdownMenu) {
-      console.error(`Dropdown menu with ID '${menuId}' not found.`);
-      return;
-    }
-    dropdownMenu.classList.toggle("open");
-
-    // Close other dropdowns
-    document.querySelectorAll(".dropdown-menu").forEach((menu) => {
-      if (menu.id !== menuId && menu.classList.contains("open")) {
-        menu.classList.remove("open");
-      }
-    });
-  };
-</script>
+<!-- <script> -->
+<!--   // Attach the function to the global `window` object for use in the HTML -->
+<!--   window.toggleDropdown = function (event: MouseEvent, menuId: string): void { -->
+<!--     event.preventDefault(); // Prevent link default behavior -->
+<!--     const dropdownMenu = document.getElementById(menuId); -->
+<!--     if (!dropdownMenu) { -->
+<!--       console.error(`Dropdown menu with ID '${menuId}' not found.`); -->
+<!--       return; // Exit if the element is not found -->
+<!--     } -->
+<!--     dropdownMenu.classList.toggle("open"); // Toggle the 'open' class -->
+<!--   }; -->
+<!-- </script> -->
