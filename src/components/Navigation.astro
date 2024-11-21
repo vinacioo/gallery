@@ -9,8 +9,10 @@ import Pagefind from "./Pagefind.astro";
     <a
       class="fade-effect dropdown-toggle"
       href="#"
-      onclick="toggleDropdown(event, 'albuns-menu')">Catálogo</a
+      onclick="toggleDropdown(event, 'albuns-menu')"
     >
+      Catálogo
+    </a>
     <div id="albuns-menu" class="dropdown-menu">
       <a class="fade-effect" href="/kanayko/">Edgar Kanaykõ</a>
       <a class="fade-effect" href="/ester/">Ester Menezes Xucuru</a>
@@ -49,13 +51,7 @@ import Pagefind from "./Pagefind.astro";
     margin-left: 25px; /* Indent the sub-menu */
   }
 
-  /* Show dropdown menu on hover (desktop) */
-  .dropdown:hover .dropdown-menu {
-    display: block;
-    top: -5px;
-  }
-
-  /* Show dropdown menu when open class is applied (mobile) */
+  /* Show dropdown menu when open class is applied */
   .dropdown-menu.open {
     display: block;
   }
@@ -114,7 +110,7 @@ import Pagefind from "./Pagefind.astro";
   /* Mobile-friendly styling */
   @media (max-width: 768px) {
     .dropdown-menu {
-      margin-left: 10; /* Align the submenu with the parent on mobile */
+      margin-left: 10px; /* Align the submenu with the parent on mobile */
       padding: 10px 0;
     }
 
@@ -124,7 +120,7 @@ import Pagefind from "./Pagefind.astro";
     }
 
     .dropdown-toggle {
-      font-size: 16px; /* Reduce font size for "Albuns" on mobile */
+      font-size: 16px; /* Reduce font size for "Catálogo" on mobile */
     }
 
     .nav-links a {
@@ -139,10 +135,27 @@ import Pagefind from "./Pagefind.astro";
   window.toggleDropdown = function (event: MouseEvent, menuId: string): void {
     event.preventDefault(); // Prevent link default behavior
     const dropdownMenu = document.getElementById(menuId);
+
     if (!dropdownMenu) {
       console.error(`Dropdown menu with ID '${menuId}' not found.`);
       return; // Exit if the element is not found
     }
-    dropdownMenu.classList.toggle("open"); // Toggle the 'open' class
+
+    const isOpen = dropdownMenu.classList.contains("open");
+
+    // Toggle the 'open' class
+    dropdownMenu.classList.toggle("open");
+
+    // Close all other dropdowns
+    document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+      if (menu !== dropdownMenu && menu.classList.contains("open")) {
+        menu.classList.remove("open");
+      }
+    });
+
+    // If the dropdown menu is already open, collapse it
+    if (isOpen) {
+      dropdownMenu.classList.remove("open");
+    }
   };
 </script>
