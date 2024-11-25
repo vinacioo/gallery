@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("short_form");
+  const blogEntries = await getCollection("priscila");
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
-const collection = "short_form";
+const collection = "priscila";
 ---
 
 <MarkdownPostLayout

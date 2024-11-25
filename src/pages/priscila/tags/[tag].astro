@@ -4,13 +4,13 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
 import { sortByDate } from "../../../components/sortbydate";
 export async function getStaticPaths() {
-  const allShortForm = await getCollection("short_form");
+  const allPriscila = await getCollection("priscila");
   const uniqueTags = [
-    ...new Set(allShortForm.map((post) => post.data.tags).flat()),
+    ...new Set(allPriscila.map((post) => post.data.tags).flat()),
   ];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = allShortForm.filter((post) =>
+    const filteredPosts = allPriscila.filter((post) =>
       post.data.tags.includes(tag),
     );
     return {
@@ -30,7 +30,7 @@ const { posts } = Astro.props;
       .sort(sortByDate)
       .map((post) => (
         <BlogPost
-          url={`/short_form/${post.slug}/`}
+          url={`/priscila/${post.slug}/`}
           image={post.data?.image?.src || ""}
           alt={post.data?.image?.alt || ""}
           title={post.data?.title || ""}
