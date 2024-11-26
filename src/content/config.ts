@@ -42,7 +42,47 @@ const short_form = defineCollection({
   }),
 });
 
-const kanayko = defineCollection({
+const edgarkanayko = defineCollection({
+  type: "content", // v2.5.0 and later
+  schema: z.object({
+    title: z.string(),
+    tags: z.array(z.string()),
+    author: z.string(),
+    description: z.string(),
+    image: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+        positionx: z.string().optional(),
+        positiony: z.string().optional(),
+      })
+      .optional(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
+const priscilatapajowara = defineCollection({
+  type: "content", // v2.5.0 and later
+  schema: z.object({
+    title: z.string(),
+    tags: z.array(z.string()),
+    author: z.string(),
+    description: z.string(),
+    image: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+        positionx: z.string().optional(),
+        positiony: z.string().optional(),
+      })
+      .optional(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
+const estermenezes = defineCollection({
   type: "content", // v2.5.0 and later
   schema: z.object({
     title: z.string(),
@@ -126,7 +166,9 @@ const authors = defineCollection({
 export const collections = {
   muses,
   short_form,
-  kanayko,
+  edgarkanayko,
+  priscilatapajowara,
+  estermenezes,
   long_form,
   zeitweilig,
   authors,

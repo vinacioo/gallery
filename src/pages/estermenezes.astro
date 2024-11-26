@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 import { sortByDate } from "../components/sortbydate";
 const pageTitle = "Ester Menezes Xucuru";
-const allEster = await getCollection("ester");
+const allEster = await getCollection("estermenezes");
 ---
 
 <BaseLayout title={pageTitle} is404Page={false}>
@@ -13,7 +13,7 @@ const allEster = await getCollection("ester");
       .sort(sortByDate)
       .map((post) => (
         <BlogPost
-          url={`/ester/${post.slug}/`}
+          url={`/estermenezes/${post.slug}/`}
           image={post.data?.image?.src || ""}
           alt={post.data?.image?.alt || ""}
           title={post.data?.title || ""}

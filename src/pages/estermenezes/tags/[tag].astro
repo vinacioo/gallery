@@ -4,7 +4,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
 import { sortByDate } from "../../../components/sortbydate";
 export async function getStaticPaths() {
-  const allEster = await getCollection("ester");
+  const allEster = await getCollection("estermenezes");
   const uniqueTags = [
     ...new Set(allEster.map((post) => post.data.tags).flat()),
   ];

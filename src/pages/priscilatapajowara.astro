@@ -3,17 +3,17 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 import { sortByDate } from "../components/sortbydate";
-const pageTitle = "Edgar Kanaykõ";
-const allShortForm = await getCollection("kanayko");
+const pageTitle = "Priscila Tapajowara";
+const allPriscila = await getCollection("priscilatapajowara");
 ---
 
 <BaseLayout title={pageTitle} is404Page={false}>
   {
-    allShortForm
+    allPriscila
       .sort(sortByDate)
       .map((post) => (
         <BlogPost
-          url={`/kanayko/${post.slug}/`}
+          url={`/priscilatapajowara/${post.slug}/`}
           image={post.data?.image?.src || ""}
           alt={post.data?.image?.alt || ""}
           title={post.data?.title || ""}
